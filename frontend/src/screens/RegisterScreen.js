@@ -37,7 +37,7 @@ const RegisterScreen = () => {
         } else {
             dispatch(register(name, email, password))
         }
-    };
+    }
 
     return (
         <FormContainer>
@@ -109,4 +109,4 @@ const RegisterScreen = () => {
     )
 }
 
-export default RegisterScreen;
+export default RegisterScreen
