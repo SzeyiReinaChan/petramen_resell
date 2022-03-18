@@ -23,16 +23,18 @@ const importData = async () => {
         const adminUser = createdUsers[0]._id
 
         const sampleProducts = products.map(product => {
-            return { ...product, user: adminUser }
+            return { 
+                ...product, 
+                user: adminUser }
         })
 
         await Product.insertMany(sampleProducts)
 
         console.log("Data Imported".green.inverse)
-        process.exit()
+        process.exit(0)
     } catch (err) {
-        console.error(`Error: ${err.message}`.red.inverse);
-        process.exit(1);
+        console.error(`${colors.red("Error:")} ${err.message}`.bold.underline)
+        process.exit(1)
     }
 }
 
@@ -42,12 +44,12 @@ const destroyData = async () => {
         await Product.deleteMany()
         await User.deleteMany()
 
-        console.log("Data Destroyed".red.inverse)
-        process.exit()
-    } catch (err) {
-        console.error(`Error: ${err.message}`.red.inverse);
-        process.exit(1);
-    }
+        console.log(`${colors.red("Data Destroyed")}`.bold.underline)
+        process.exit(0)
+      } catch (err) {
+        console.error(`${colors.red("Error:")} ${err.message}`.bold.underline)
+        process.exit(1)
+      }
 }
 
 if (process.argv[2] === "-d") {

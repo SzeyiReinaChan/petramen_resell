@@ -1,6 +1,6 @@
-import { 
-    PRODUCT_LIST_REQUEST, 
-    PRODUCT_LIST_SUCCESS, 
+import {
+    PRODUCT_LIST_REQUEST,
+    PRODUCT_LIST_SUCCESS,
     PRODUCT_LIST_FAIL,
     PRODUCT_DETAILS_REQUEST,
     PRODUCT_DETAILS_SUCCESS,
@@ -15,6 +15,7 @@ export const productListReducer = (
         case PRODUCT_LIST_REQUEST:
             return { loading: true, products: [] }
         case PRODUCT_LIST_SUCCESS:
+            //TODO: action.payload.products?
             return { loading: false, products: action.payload }
         case PRODUCT_LIST_FAIL:
             return { loading: false, error: action.payload }
@@ -24,8 +25,9 @@ export const productListReducer = (
 }
 
 export const productDetailsReducer = (
-    state = { product: { revires : [] } },
-     action) => {
+    state = { product: { reviews: [] } },
+    action
+) => {
     switch (action.type) {
         case PRODUCT_DETAILS_REQUEST:
             return { loading: true, ...state }
