@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { Table, Button, Row, Col } from 'react-bootstrap'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { listProducts } from '../actions/productActions'
+import { listProducts, deleteProduct, createProduct } from '../actions/productActions'
+import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 
 const ProductListScreen = () => {
     const dispatch = useDispatch()
@@ -14,29 +15,49 @@ const ProductListScreen = () => {
     const productList = useSelector((state) => state.productList)
     const { loading, error, products } = productList
 
+    const productDelete = useSelector((state) => state.productDelete)
+    const { loading: loadingDelete, error: errorDelete, success: successDelete } = productDelete
+
+    const productCreate = useSelector((state) => state.productCreate)
+    const {
+        loading: loadingCreate,
+        error: errorCreate,
+        success: successCreate,
+        product: createdProduct,
+    } = productCreate
+
     const userLogin = useSelector((state) => state.userLogin)
     const { userInfo } = userLogin
 
     useEffect(() => {
+        dispatch({ type: PRODUCT_CREATE_RESET })
+
         if (!userInfo && !userInfo.isAdmin) {
             navigate('/login')
+        }
+
+        if (successCreate) {
+            navigate(`/admin/product/${createdProduct._id}/edit`)
         } else {
             dispatch(listProducts())
         }
     }, [
         dispatch,
         navigate,
-        userInfo
+        userInfo,
+        successDelete,
+        successCreate,
+        createdProduct
     ])
 
     const deleteHandler = (id) => {
         if (window.confirm('Are you sure to delete this user?')) {
-            // dispatch(deleteProducts(id))
+            dispatch(deleteProduct(id))
         }
     }
 
     const createProductHandler = (product) => {
-        //create product
+        dispatch(createProduct())
     }
 
     return (
@@ -51,6 +72,10 @@ const ProductListScreen = () => {
                     </Button>
                 </Col>
             </Row>
+            {loadingDelete && <Loader />}
+            {errorDelete && <Message variant='danger'>{errorDelete}</Message>}
+            {loadingCreate && <Loader />}
+            {errorCreate && <Message variant='danger'>{errorCreate}</Message>}
             {loading ? <Loader /> : error ? (
                 < Message variant="danger">{error}</Message>
             ) : (
