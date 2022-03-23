@@ -6,24 +6,24 @@ import Message from '../components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 
 const CartScreen = () => {
-    const { id } = useParams();
-    const productId = id;
+    const { id } = useParams()
+    const productId = id
 
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
-    const [searchParms] = useSearchParams();
-    const qty = Number(searchParms.get("qty"));
+    const [searchParms] = useSearchParams()
+    const qty = Number(searchParms.get("qty"))
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
 
-    const cart = useSelector(state => state.cart);
-    const { cartItems } = cart;
+    const cart = useSelector(state => state.cart)
+    const { cartItems } = cart
 
     useEffect(() => {
         if (productId) {
-            dispatch(addToCart(productId, qty));
+            dispatch(addToCart(productId, qty))
         }
-    }, [dispatch, productId, qty]);
+    }, [dispatch, productId, qty])
 
     const removeFromCartHandler = (id) => {
         dispatch(removeFromCart(id))
