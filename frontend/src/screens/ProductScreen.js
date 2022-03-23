@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
-import { Row, Col, Image, ListGroup, Card, Button, Form, ListGroupItem, FormControl } from "react-bootstrap"
+import { Row, Col, Image, ListGroup, Card, Button, Form } from "react-bootstrap"
 import Rating from "../components/Rating"
 import Message from "../components/Message"
 import Loader from "../components/Loader"
+import Meta from "../components/Meta"
 import { listProductDetails, createProductReview } from "../actions/productActions"
 import { PRODUCT_CREATE_REVIEW_RESET } from "../constants/productConstants"
 
@@ -35,7 +36,7 @@ const ProductScreen = () => {
         if (successProductReview) {
             alert("Review Submitted!")
             setRating(0)
-            setComment('')
+            setComment("")
             dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
         }
         if (!product._id || product._id !== productId) {
@@ -69,13 +70,14 @@ const ProductScreen = () => {
                     <Message variant="danger">{error}</Message>
                 ) : (
                 <>
+                    <Meta title={product.name} />
                     <Row>
                         <Col md={6}>
-                            <Image src={product.image} alt={product.name} fluid />{' '}
+                            <Image src={product.image} alt={product.name} fluid />{" "}
                         </Col>
                         <Col md={3}>
-                            <ListGroup variant='flush'>
-                                {' '}
+                            <ListGroup variant="flush">
+                                {" "}
                                 <ListGroup.Item>
                                     <h3>{product.name}</h3>
                                 </ListGroup.Item>
@@ -93,7 +95,7 @@ const ProductScreen = () => {
                         </Col>
                         <Col md={3}>
                             <Card>
-                                <ListGroup variant='flush'>
+                                <ListGroup variant="flush">
                                     <ListGroup.Item>
                                         <Row>
                                             <Col>Price:</Col>
@@ -107,7 +109,7 @@ const ProductScreen = () => {
                                         <Row>
                                             <Col>Status:</Col>
                                             <Col>
-                                                {product.countInStock > 0 ? 'In Stock' : 'Out Of Stock'}
+                                                {product.countInStock > 0 ? "In Stock" : "Out Of Stock"}
                                             </Col>
                                         </Row>
                                     </ListGroup.Item>
@@ -118,7 +120,7 @@ const ProductScreen = () => {
                                                 <Col>Qty:</Col>
                                                 <Col>
                                                     <Form.Control
-                                                        as='select'
+                                                        as="select"
                                                         value={qty}
                                                         onChange={(e) => {
                                                             setQty(e.target.value)

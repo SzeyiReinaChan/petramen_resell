@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useSearchParams, useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { Form, Button, Row, Col } from 'react-bootstrap'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import FormContainer from '../components/FormContainer'
-import { register } from '../actions/userActions'
+import React, { useState, useEffect } from "react"
+import { Link, useSearchParams, useNavigate } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+import { Form, Button, Row, Col } from "react-bootstrap"
+import Message from "../components/Message"
+import Loader from "../components/Loader"
+import FormContainer from "../components/FormContainer"
+import { register } from "../actions/userActions"
 
 
 const RegisterScreen = () => {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
     const [message, setMessage] = useState(null)
 
     const dispatch = useDispatch()
@@ -22,7 +22,7 @@ const RegisterScreen = () => {
     const { loading, error, userInfo } = userRegister
 
     const [searchParms] = useSearchParams()
-    const redirect = searchParms.get('redirect') || '/'
+    const redirect = searchParms.get("redirect") || "/"
 
     useEffect(() => {
         if (userInfo) {
@@ -43,64 +43,64 @@ const RegisterScreen = () => {
         <FormContainer>
             <br />
             <h1>Sign Up</h1>
-            {message && <Message variant='danger'>{message}</Message>}
-            {error && <Message variant='danger'>{error}</Message>}
+            {message && <Message variant="danger">{message}</Message>}
+            {error && <Message variant="danger">{error}</Message>}
             {loading && <Loader />}
             <Form onSubmit={submitHandler}>
                 <br />
-                <Form.Group controlId='name'>
+                <Form.Group controlId="name">
                     <Form.Label>Name</Form.Label>
                     <Form.Control
-                        type='name'
-                        placeholder='Enter name'
+                        type="name"
+                        placeholder="Enter name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
 
                 <br />
-                <Form.Group controlId='email'>
+                <Form.Group controlId="email">
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control
-                        type='email'
-                        placeholder='Enter email'
+                        type="email"
+                        placeholder="Enter email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
 
                 <br />
-                <Form.Group controlId='password'>
+                <Form.Group controlId="password">
                     <Form.Label>Enter Password</Form.Label>
                     <Form.Control
-                        type='password'
-                        placeholder='Enter password'
+                        type="password"
+                        placeholder="Enter password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
 
                 <br />
-                <Form.Group controlId='confirmPassword'>
+                <Form.Group controlId="confirmPassword">
                     <Form.Label>Confirm Password</Form.Label>
                     <Form.Control
-                        type='Password'
-                        placeholder='Confirm Password'
+                        type="Password"
+                        placeholder="Confirm Password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                     ></Form.Control>
                 </Form.Group>
 
                 <br />
-                <Button type='submit' variant='primary'>
+                <Button type="submit" variant="primary">
                     Register
                 </Button>
             </Form>
 
-            <Row className='py-3'>
+            <Row className="py-3">
                 <Col>
-                    Have an Account?{' '}
-                    <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
+                    Have an Account?{" "}
+                    <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
                         Login
                     </Link>
                 </Col>

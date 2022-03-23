@@ -141,7 +141,7 @@ export const updateProduct = (product) => async (dispatch, getState) => {
 
     const config = {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${userInfo.token}`,
       },
     }
@@ -180,7 +180,7 @@ export const createProductReview =
 
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${userInfo.token}`,
         },
       }
@@ -195,7 +195,7 @@ export const createProductReview =
         error.response && error.response.data.message
           ? error.response.data.message
           : error.message
-      if (message === 'Not authorized, token failed') {
+      if (message === "Not authorized, token failed") {
         // dispatch(logout())
       }
       dispatch({

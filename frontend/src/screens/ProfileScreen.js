@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { Table, Form, Button, Row, Col } from 'react-bootstrap'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import { LinkContainer } from 'react-router-bootstrap'
-import { getUserDetails, updateUserProfile } from '../actions/userActions'
-import { listMyOrders } from '../actions/orderActions'
+import React, { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+import { Table, Form, Button, Row, Col } from "react-bootstrap"
+import Message from "../components/Message"
+import Loader from "../components/Loader"
+import { LinkContainer } from "react-router-bootstrap"
+import { getUserDetails, updateUserProfile } from "../actions/userActions"
+import { listMyOrders } from "../actions/orderActions"
 
 const ProfileScreen = () => {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setConfirmPassword] = useState('')
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
     const [message, setMessage] = useState(null)
 
     const dispatch = useDispatch()
@@ -59,56 +59,56 @@ const ProfileScreen = () => {
             <Col md={3}>
                 <br />
                 <h2>User Profile</h2>
-                {message && <Message variant='danger'>{message}</Message>}
-                {error && <Message variant='danger'>{error}</Message>}
-                {success && <Message variant='success'>Profile Updated</Message>}
+                {message && <Message variant="danger">{message}</Message>}
+                {error && <Message variant="danger">{error}</Message>}
+                {success && <Message variant="success">Profile Updated</Message>}
                 {loading && <Loader />}
                 <Form onSubmit={submitHandler}>
-                    <Form.Group controlId='name'>
+                    <Form.Group controlId="name">
                         <Form.Label>Name</Form.Label>
                         <Form.Control
-                            type='name'
-                            placeholder='Enter name'
+                            type="name"
+                            placeholder="Enter name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         ></Form.Control>
                     </Form.Group>
 
                     <br />
-                    <Form.Group controlId='email'>
+                    <Form.Group controlId="email">
                         <Form.Label>Email Address</Form.Label>
                         <Form.Control
-                            type='email'
-                            placeholder='Enter email'
+                            type="email"
+                            placeholder="Enter email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         ></Form.Control>
                     </Form.Group>
 
                     <br />
-                    <Form.Group controlId='password'>
+                    <Form.Group controlId="password">
                         <Form.Label>Enter Password</Form.Label>
                         <Form.Control
-                            type='password'
-                            placeholder='Enter password'
+                            type="password"
+                            placeholder="Enter password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         ></Form.Control>
                     </Form.Group>
 
                     <br />
-                    <Form.Group controlId='confirmPassword'>
+                    <Form.Group controlId="confirmPassword">
                         <Form.Label>Confirm Password</Form.Label>
                         <Form.Control
-                            type='password'
-                            placeholder='Confirm password'
+                            type="password"
+                            placeholder="Confirm password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         ></Form.Control>
                     </Form.Group>
 
                     <br />
-                    <Button type='submit' variant='primary'>
+                    <Button type="submit" variant="primary">
                         Update
                     </Button>
                 </Form>
@@ -119,9 +119,9 @@ const ProfileScreen = () => {
                 {loadingOrders ? (
                     <Loader />
                 ) : errorOrders ? (
-                    <Message variant='danger'>{errorOrders}</Message>
+                    <Message variant="danger">{errorOrders}</Message>
                 ) : (
-                    <Table striped hover responsive className='table-sm'>
+                    <Table striped hover responsive className="table-sm">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -142,19 +142,19 @@ const ProfileScreen = () => {
                                         {order.isPaid ? (
                                             order.paidAt.substring(0, 10)
                                         ) : (
-                                            <i className='fas fa-times' style={{ color: 'red' }}></i>
+                                            <i className="fas fa-times" style={{ color: "red" }}></i>
                                         )}
                                     </td>
                                     <td>
                                         {order.isDelivered ? (
                                             order.deliveredAt.substring(0, 10)
                                         ) : (
-                                            <i className='fas fa-times' style={{ color: 'red' }}></i>
+                                            <i className="fas fa-times" style={{ color: "red" }}></i>
                                         )}
                                     </td>
                                     <td>
                                         <LinkContainer to={`/order/${order._id}`}>
-                                            <Button className='btn-sm' variant='light'>
+                                            <Button className="btn-sm" variant="light">
                                                 Details
                                             </Button>
                                         </LinkContainer>

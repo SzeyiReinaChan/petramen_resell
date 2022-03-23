@@ -1,17 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import { PayPalButton } from 'react-paypal-button-v2'
-import { Link, useParams, useNavigate } from 'react-router-dom'
-import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
-import { useSelector, useDispatch } from 'react-redux'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions'
-import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants'
+import React, { useState, useEffect } from "react"
+import axios from "axios"
+import { PayPalButton } from "react-paypal-button-v2"
+import { Link, useParams, useNavigate } from "react-router-dom"
+import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap"
+import { useSelector, useDispatch } from "react-redux"
+import Message from "../components/Message"
+import Loader from "../components/Loader"
+import { getOrderDetails, payOrder, deliverOrder } from "../actions/orderActions"
+import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from "../constants/orderConstants"
 
 
 const OrderScreen = () => {
-    const { id: orderId } = useParams();
+    const { id: orderId } = useParams()
 
     const [sdkReady, setSdkReady] = useState(false)
 
@@ -43,7 +43,7 @@ const OrderScreen = () => {
 
     useEffect(() => {
         if (!userInfo) {
-            navigate('/login')
+            navigate("/login")
         }
 
         const addPayPalScript = async () => {
@@ -86,7 +86,7 @@ const OrderScreen = () => {
             <h1>Order {order._id}</h1>
             <Row>
                 <Col md={8}>
-                    <ListGroup variant='flush'>
+                    <ListGroup variant="flush">
 
                         <ListGroup.Item>
 
@@ -95,21 +95,21 @@ const OrderScreen = () => {
                                 <strong>Name:  </strong> {order.user.name}
                             </p>
                             <p>
-                                <strong>Email:  </strong>{' '}
+                                <strong>Email:  </strong>{" "}
                                 <a href={`mailto:${order.user.email}`}>{order.user.email}</a>
                             </p>
                             <p>
                                 <strong>Address:  </strong>
-                                {order.shippingAddress.address}, {order.shippingAddress.city}{' '}
-                                {order.shippingAddress.postalCode},{' '}
+                                {order.shippingAddress.address}, {order.shippingAddress.city}{" "}
+                                {order.shippingAddress.postalCode},{" "}
                                 {order.shippingAddress.country}
                             </p>
                             {order.isDelivered ? (
-                                <Message variant='success'>
+                                <Message variant="success">
                                     Delivered on {order.deliveredAt}
                                 </Message>
                             ) : (
-                                <Message variant='danger'>Not Delivered</Message>
+                                <Message variant="danger">Not Delivered</Message>
                             )}
 
                             <h2>Payment Method</h2>
@@ -118,16 +118,16 @@ const OrderScreen = () => {
                                 {order.paymentMethod}
                             </p>
                             {order.isPaid ? (
-                                <Message variant='success'>Paid on {order.paidAt}</Message>
+                                <Message variant="success">Paid on {order.paidAt}</Message>
                             ) : (
-                                <Message variant='danger'>Not Paid</Message>
+                                <Message variant="danger">Not Paid</Message>
                             )}
 
                             <h2>Order Items</h2>
                             {order.orderItems.length === 0 ? (
                                 <Message>Your order is empty</Message>
                             ) : (
-                                <ListGroup variant='flush'>
+                                <ListGroup variant="flush">
                                     {order.orderItems.map((item, index) => (
                                         <ListGroup.Item key={index}>
                                             <Row>
@@ -155,7 +155,7 @@ const OrderScreen = () => {
                 </Col>
                 <Col md={4}>
                     <Card>
-                        <ListGroup variant='flush'>
+                        <ListGroup variant="flush">
 
                             <ListGroup.Item>
                                 <h2>Order Summary</h2>
@@ -201,7 +201,7 @@ const OrderScreen = () => {
                                 <ListGroup.Item>
                                     <Button
                                         type="button"
-                                        className='btn btn-block'
+                                        className="btn btn-block"
                                         onClick={deliverHandler}
                                     >
                                         Mark as Delivered

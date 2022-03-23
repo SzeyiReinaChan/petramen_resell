@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
-import { useSelector, useDispatch } from 'react-redux'
-import Message from '../components/Message'
-import CheckoutSteps from '../components/CheckoutSteps'
-import { createOrder } from '../actions/orderActions'
-import { USER_DETAILS_RESET } from '../constants/userConstants'
-import { ORDER_CREATE_RESET } from '../constants/orderConstants'
+import React, { useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap"
+import { useSelector, useDispatch } from "react-redux"
+import Message from "../components/Message"
+import CheckoutSteps from "../components/CheckoutSteps"
+import { createOrder } from "../actions/orderActions"
+import { USER_DETAILS_RESET } from "../constants/userConstants"
+import { ORDER_CREATE_RESET } from "../constants/orderConstants"
 
 const PlaceOrderScreen = () => {
     const cart = useSelector((state) => state.cart)
@@ -42,7 +42,7 @@ const PlaceOrderScreen = () => {
             dispatch({ type: USER_DETAILS_RESET })
             dispatch({ type: ORDER_CREATE_RESET })
         }
-    }, [navigate, success])
+    }, [navigate, success, dispatch, order._id])
 
     const placeOrderHandler = () => {
         dispatch(
@@ -63,15 +63,15 @@ const PlaceOrderScreen = () => {
             <CheckoutSteps step1 step2 step3 step4 />
             <Row>
                 <Col md={8}>
-                    <ListGroup variant='flush'>
+                    <ListGroup variant="flush">
 
                         <ListGroup.Item>
 
                             <h2>Shipping</h2>
                             <p>
                                 <strong>Address:  </strong>
-                                {cart.shippingAddress.address}, {cart.shippingAddress.city}{' '}
-                                {cart.shippingAddress.postalCode},{' '}
+                                {cart.shippingAddress.address}, {cart.shippingAddress.city}{" "}
+                                {cart.shippingAddress.postalCode},{" "}
                                 {cart.shippingAddress.country}
                             </p>
                             {/* </ListGroup.Item> */}
@@ -89,7 +89,7 @@ const PlaceOrderScreen = () => {
                             {cart.cartItems.length === 0 ? (
                                 <Message>Your cart is empty</Message>
                             ) : (
-                                <ListGroup variant='flush'>
+                                <ListGroup variant="flush">
                                     {cart.cartItems.map((item, index) => (
                                         <ListGroup.Item key={index}>
                                             <Row>
@@ -117,7 +117,7 @@ const PlaceOrderScreen = () => {
                 </Col>
                 <Col md={4}>
                     <Card>
-                        <ListGroup variant='flush'>
+                        <ListGroup variant="flush">
 
                             <ListGroup.Item>
                                 <h2>Order Summary</h2>
@@ -143,13 +143,13 @@ const PlaceOrderScreen = () => {
                                     <Col>${cart.totalPrice}</Col>
                                 </Row>
 
-                                {error && <Message variant='danger'>{error}</Message>}
+                                {error && <Message variant="danger">{error}</Message>}
                             </ListGroup.Item>
 
                             <ListGroup.Item>
                                 <Button
-                                    type='button'
-                                    className='btn-block'
+                                    type="button"
+                                    className="btn-block"
                                     disabled={cart.cartItems === 0}
                                     onClick={placeOrderHandler}
                                 >

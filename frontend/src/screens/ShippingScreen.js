@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { Form, Button } from 'react-bootstrap'
-import FormContainer from '../components/FormContainer'
-import CheckoutSteps from '../components/CheckoutSteps'
-import { saveShippingAddress } from '../actions/cartActions'
+import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+import { Form, Button } from "react-bootstrap"
+import FormContainer from "../components/FormContainer"
+import CheckoutSteps from "../components/CheckoutSteps"
+import { saveShippingAddress } from "../actions/cartActions"
 
 const ShippingScreen = () => {
     const cart = useSelector((state) => state.cart)
@@ -21,7 +21,7 @@ const ShippingScreen = () => {
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(saveShippingAddress({ address, city, postalCode, country }))
-        navigate('/payment')
+        navigate("/payment")
     }
 
     return <FormContainer>
@@ -30,11 +30,11 @@ const ShippingScreen = () => {
         <h1>Shipping</h1>
         <Form onSubmit={submitHandler}>
             <br />
-            <Form.Group controlId='address'>
+            <Form.Group controlId="address">
                 <Form.Label>Address</Form.Label>
                 <Form.Control
-                    type='text'
-                    placeholder='Enter address'
+                    type="text"
+                    placeholder="Enter address"
                     value={address}
                     required
                     onChange={(e) => setAddress(e.target.value)}
@@ -42,11 +42,11 @@ const ShippingScreen = () => {
             </Form.Group>
 
             <br />
-            <Form.Group controlId='city'>
+            <Form.Group controlId="city">
                 <Form.Label>City</Form.Label>
                 <Form.Control
-                    type='text'
-                    placeholder='Enter city'
+                    type="text"
+                    placeholder="Enter city"
                     value={city}
                     required
                     onChange={(e) => setCity(e.target.value)}
@@ -54,11 +54,11 @@ const ShippingScreen = () => {
             </Form.Group>
 
             <br />
-            <Form.Group controlId='postalCode'>
+            <Form.Group controlId="postalCode">
                 <Form.Label>Postal Code</Form.Label>
                 <Form.Control
-                    type='text'
-                    placeholder='Enter postal code'
+                    type="text"
+                    placeholder="Enter postal code"
                     value={postalCode}
                     required
                     onChange={(e) => setPostalCode(e.target.value)}
@@ -66,11 +66,11 @@ const ShippingScreen = () => {
             </Form.Group>
 
             <br />
-            <Form.Group controlId='country'>
+            <Form.Group controlId="country">
                 <Form.Label>Country</Form.Label>
                 <Form.Control
-                    type='text'
-                    placeholder='Enter country'
+                    type="text"
+                    placeholder="Enter country"
                     value={country}
                     required
                     onChange={(e) => setCountry(e.target.value)}
@@ -78,7 +78,7 @@ const ShippingScreen = () => {
             </Form.Group>
 
             <br />
-            <Button type='submit' variant='primary'>
+            <Button type="submit" variant="primary">
                 Continue
             </Button>
         </Form>

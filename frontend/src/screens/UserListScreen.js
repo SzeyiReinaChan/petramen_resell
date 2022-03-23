@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react'
-import { LinkContainer } from 'react-router-bootstrap'
-import { Link, useSearchParams, useNavigate } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { Table, Button } from 'react-bootstrap'
-import Message from '../components/Message'
-import Loader from '../components/Loader'
-import { listUsers, deleteUser } from '../actions/userActions'
+import React, { useEffect } from "react"
+import { LinkContainer } from "react-router-bootstrap"
+import { useNavigate } from "react-router-dom"
+import { useSelector, useDispatch } from "react-redux"
+import { Table, Button } from "react-bootstrap"
+import Message from "../components/Message"
+import Loader from "../components/Loader"
+import { listUsers, deleteUser } from "../actions/userActions"
 
 const UserListScreen = () => {
     const dispatch = useDispatch()
@@ -24,12 +24,12 @@ const UserListScreen = () => {
         if (userInfo && userInfo.isAdmin) {
             dispatch(listUsers())
         } else {
-            navigate('/login')
+            navigate("/login")
         }
     }, [dispatch, navigate, successDelete, userInfo])
 
     const deleteHandler = (id) => {
-        if (window.confirm('Are you sure to delete this user?')) {
+        if (window.confirm("Are you sure to delete this user?")) {
             dispatch(deleteUser(id))
         }
     }
@@ -38,7 +38,7 @@ const UserListScreen = () => {
         <>
             <h1>Users</h1>
             {loading ? <Loader /> : error ? < Message variant="danger">{error}</Message> : (
-                <Table striped hover responsive className='table-sm'>
+                <Table striped hover responsive className="table-sm">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -59,11 +59,11 @@ const UserListScreen = () => {
                                 <td>
                                     {user.isAdmin ? (
                                         <i
-                                            className='fas fa-check'
+                                            className="fas fa-check"
                                             style={{ color: "green" }}>
                                         </i>) : (
                                         <i
-                                            className='fas fa-times'
+                                            className="fas fa-times"
                                             style={{ color: "red" }}>
                                         </i>
                                     )}
@@ -71,16 +71,16 @@ const UserListScreen = () => {
                                 <td>
                                     <LinkContainer to={`/admin/user/${user._id}/edit`}>
                                         <Button
-                                            variant='light'
-                                            className='btn-sm'>
-                                            <i className='fas fa-edit'></i>
+                                            variant="light"
+                                            className="btn-sm">
+                                            <i className="fas fa-edit"></i>
                                         </Button>
                                     </LinkContainer>
                                     <Button
-                                        variant='danger'
-                                        className='btn-sm'
+                                        variant="danger"
+                                        className="btn-sm"
                                         onClick={() => deleteHandler(user._id)}>
-                                        <i className='fas fa-trash'></i>
+                                        <i className="fas fa-trash"></i>
                                     </Button>
                                 </td>
                             </tr>
